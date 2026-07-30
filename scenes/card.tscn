@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bqbb84nebjtkv"]
 
+[ext_resource type="Script" uid="uid://cwlpkuwitp7ko" path="res://scripts/card.gd" id="1_6u4wf"]
 [ext_resource type="Texture2D" uid="uid://bl20fjeqopif4" path="res://assets/sprites/knight.png" id="1_d81rb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h62n"]
@@ -9,38 +10,37 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bj4t2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqvok"]
 size = Vector2(30, 50)
 
 [node name="Card" type="Node2D" unique_id=867219664]
+script = ExtResource("1_6u4wf")
 
-[node name="Control" type="Control" parent="." unique_id=437913108]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Panel" type="Panel" parent="Control" unique_id=781439051]
-custom_minimum_size = Vector2(20, 40)
-layout_mode = 1
+[node name="Panel" type="Panel" parent="." unique_id=781439051]
+custom_minimum_size = Vector2(30, 50)
 anchors_preset = -1
 anchor_left = -0.375
 anchor_top = -0.625
 anchor_right = 0.125
 anchor_bottom = 0.375
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -15.0
+offset_top = -25.0
+offset_right = 15.0
+offset_bottom = 25.0
 pivot_offset = Vector2(15, 25)
 offset_transform_enabled = true
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0h62n")
-metadata/_edit_use_anchors_ = true
 
 [node name="CardImage" type="Sprite2D" parent="." unique_id=1672238433]
 texture = ExtResource("1_d81rb")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1974005998]
+[node name="Area2D" type="Area2D" parent="." unique_id=755494646]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1283262106]
-shape = SubResource("RectangleShape2D_bj4t2")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=281027050]
+shape = SubResource("RectangleShape2D_mqvok")
+
+[connection signal="mouse_entered" from="Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Panel" to="." method="_on_panel_mouse_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
