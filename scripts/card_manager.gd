@@ -5,6 +5,8 @@ extends Node2D
 
 @onready var player_hand: Node2D = $"../PlayerHand"
 @onready var camera_2d: Camera2D = $"../Camera2D"
+@onready var input_manager: Node2D = $"../InputManager"
+@onready var card_draw_speed: float = $"../Deck".card_draw_speed
 
 var screen_size: Vector2
 var card_being_dragged: Node2D
@@ -12,21 +14,16 @@ var is_hovering_on_card: bool
 
 func _ready() -> void:
 	screen_size = get_viewport_rect().size / camera_2d.zoom
+	input_manager.connect("left_mouse_button_released", on_left_mouse_button_released)
 
 func _process(_delta: float) -> void:
 	if card_being_dragged:
 		var mouse_position = get_global_mouse_position()
 		card_being_dragged.position = Vector2(clamp(mouse_position.x, -screen_size.x/2, screen_size.x/2), clamp(mouse_position.y, -screen_size.y/2, screen_size.y/2))
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.is_pressed():
-			var card = raycast_check(card_collision_mask)
-			if card:
-				start_drag(card)
-		else:
-			if card_being_dragged:
-				finish_drag()
+func on_left_mouse_button_released() -> void:
+	if card_being_dragged:
+		finish_drag()
 
 func start_drag(card) -> void:
 	card_being_dragged = card
@@ -42,7 +39,7 @@ func finish_drag() -> void:
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
 	else:
-		player_hand.add_card_to_hand(card_being_dragged)
+		player_hand.add_card_to_hand(card_being_dragged, card_draw_speed)
 	card_being_dragged = null
 
 

@@ -14,6 +14,7 @@ border_width_bottom = 1
 size = Vector2(30, 50)
 
 [node name="Card" type="Node2D" unique_id=867219664]
+position = Vector2(-210, 100)
 script = ExtResource("1_6u4wf")
 
 [node name="Panel" type="Panel" parent="." unique_id=781439051]
