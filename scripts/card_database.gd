@@ -1,6 +1,8 @@
-# card: [attack, health]
+# card: [attack, health, type]
 const CARDS: Dictionary = {
-	"knight": [2, 3],
-	"archer": [1, 1],
-	"demon": [5, 7]
+	"knight": [2, 3, CardTypes.MONSTER],
+	"archer": [1, 1, CardTypes.MONSTER],
+	"demon": [5, 7, CardTypes.MONSTER]
 }
+
+enum CardTypes { MONSTER, MAGIC }

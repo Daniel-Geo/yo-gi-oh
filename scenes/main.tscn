@@ -11,16 +11,151 @@
 [node name="CardManager" type="Node2D" parent="." unique_id=135606361]
 script = ExtResource("1_0wfyh")
 
-[node name="CardSlot" parent="." unique_id=1162383417 instance=ExtResource("3_sugp2")]
+[node name="CardSlots" type="Node2D" parent="." unique_id=1929826168]
+
+[node name="OpponentCardSlots" type="Node2D" parent="CardSlots" unique_id=400342302]
+
+[node name="MonsterCardSlots" type="Node2D" parent="CardSlots/OpponentCardSlots" unique_id=1986593213]
+
+[node name="CardSlot" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=580510374 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(-70, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot2" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=1293426019 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(-35, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot3" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=1114910881 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(0, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot4" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=277573807 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(35, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot5" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=730114992 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(70, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="MagicCardSlots" type="Node2D" parent="CardSlots/OpponentCardSlots" unique_id=788078365]
+
+[node name="CardSlot" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=1162383417 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(-70, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot2" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=1278083166 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(-35, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot3" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=399956106 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(0, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot4" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=613495783 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(35, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot5" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=640056525 instance=ExtResource("3_sugp2")]
+process_mode = 4
+position = Vector2(70, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="PlayerCardSlots" type="Node2D" parent="CardSlots" unique_id=1562009555]
+
+[node name="MonsterCardSlots" type="Node2D" parent="CardSlots/PlayerCardSlots" unique_id=1189236044]
+
+[node name="CardSlot" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=2045150089 instance=ExtResource("3_sugp2")]
+position = Vector2(-70, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot2" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=1694820968 instance=ExtResource("3_sugp2")]
+position = Vector2(-35, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot3" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=1975200265 instance=ExtResource("3_sugp2")]
+position = Vector2(0, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot4" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=1983319832 instance=ExtResource("3_sugp2")]
+position = Vector2(35, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot5" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=588342407 instance=ExtResource("3_sugp2")]
+position = Vector2(70, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="MagicCardSlots" type="Node2D" parent="CardSlots/PlayerCardSlots" unique_id=1139387362]
+
+[node name="CardSlot" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=448970929 instance=ExtResource("3_sugp2")]
+position = Vector2(-70, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot2" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=1903866420 instance=ExtResource("3_sugp2")]
+position = Vector2(-35, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot3" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=976115019 instance=ExtResource("3_sugp2")]
+position = Vector2(0, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot4" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=320155561 instance=ExtResource("3_sugp2")]
+position = Vector2(35, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot5" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=1861675684 instance=ExtResource("3_sugp2")]
+position = Vector2(70, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
 
 [node name="PlayerHand" type="Node2D" parent="." unique_id=2012680316]
 script = ExtResource("3_jyhfs")
 
-[node name="Deck" parent="." unique_id=889542571 instance=ExtResource("4_jyhfs")]
-position = Vector2(-210, 100)
+[node name="PlayerDeck" parent="." unique_id=889542571 instance=ExtResource("4_jyhfs")]
+position = Vector2(-225, 112)
+scale = Vector2(0.8, 0.8)
+
+[node name="OpponentDeck" parent="." unique_id=1527358891 instance=ExtResource("4_jyhfs")]
+process_mode = 4
+position = Vector2(225, -110)
+scale = Vector2(0.8, 0.8)
+script = null
 
 [node name="InputManager" type="Node2D" parent="." unique_id=665685683]
 script = ExtResource("5_tbgi4")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1144842882]
 zoom = Vector2(4, 4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1073574809]
+
+[node name="EndTurnButton" type="Button" parent="CanvasLayer" unique_id=681446308]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -15.5
+offset_right = 39.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "End Turn"

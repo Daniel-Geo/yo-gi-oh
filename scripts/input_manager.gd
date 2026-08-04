@@ -7,7 +7,7 @@ signal left_mouse_button_released
 @export var deck_collision_mask: int = 4
 
 @onready var card_manager: Node2D = $"../CardManager"
-@onready var deck: Node2D = $"../Deck"
+@onready var deck: Node2D = $"../PlayerDeck"
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

@@ -4,6 +4,8 @@ signal hovered
 signal hovered_off
 
 var starting_position: Vector2
+var is_in_card_slot: bool = false
+var card_type: CardDatabase.CardTypes
 
 func _ready() -> void:
 	get_parent().connect_card_signals(self)
