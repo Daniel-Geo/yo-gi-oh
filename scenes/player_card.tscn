@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bqbb84nebjtkv"]
 
-[ext_resource type="Script" uid="uid://cwlpkuwitp7ko" path="res://scripts/card.gd" id="1_6u4wf"]
-[ext_resource type="Texture2D" uid="uid://bl20fjeqopif4" path="res://assets/sprites/knight.png" id="1_d81rb"]
-[ext_resource type="Texture2D" uid="uid://cb1yxcyj0xpgl" path="res://assets/sprites/Deck.png" id="3_ktuci"]
+[ext_resource type="Script" uid="uid://cwlpkuwitp7ko" path="res://scripts/player_card.gd" id="1_kx8ed"]
+[ext_resource type="Texture2D" uid="uid://bl20fjeqopif4" path="res://assets/sprites/knight.png" id="2_nx7or"]
+[ext_resource type="Texture2D" uid="uid://cb1yxcyj0xpgl" path="res://assets/sprites/Deck.png" id="3_foft5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h62n"]
 bg_color = Color(0.13501206, 0.13501206, 0.13501206, 1)
@@ -96,10 +96,22 @@ tracks/5/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/CardImage:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_sy11y"]
 resource_name = "card_flip"
-length = 0.19999999999999998
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -172,6 +184,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/CardImage:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6ligt"]
 _data = {
@@ -179,10 +203,10 @@ _data = {
 &"card_flip": SubResource("Animation_sy11y")
 }
 
-[node name="Card" type="Node2D" unique_id=867219664]
+[node name="PlayerCard" type="Node2D" unique_id=867219664]
 position = Vector2(-225, 110)
 scale = Vector2(0.8, 0.8)
-script = ExtResource("1_6u4wf")
+script = ExtResource("1_kx8ed")
 
 [node name="Panel" type="Panel" parent="." unique_id=781439051]
 anchors_preset = -1
@@ -254,12 +278,12 @@ vertical_alignment = 2
 [node name="CardImage" type="Sprite2D" parent="Panel" unique_id=1672238433]
 unique_name_in_owner = true
 position = Vector2(15, 6)
-texture = ExtResource("1_d81rb")
+texture = ExtResource("2_nx7or")
 
 [node name="CardBackImage" type="Sprite2D" parent="." unique_id=940135407]
 position = Vector2(0.5, 0)
 scale = Vector2(0.167, 0.189)
-texture = ExtResource("3_ktuci")
+texture = ExtResource("3_foft5")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=755494646]
 

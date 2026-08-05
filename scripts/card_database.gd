@@ -1,3 +1,5 @@
+extends Node2D
+
 # card: [attack, health, type]
 const CARDS: Dictionary = {
 	"knight": [2, 3, CardTypes.MONSTER],

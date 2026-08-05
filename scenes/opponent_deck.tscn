@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cnh5d5xwt5eke"]
+
+[ext_resource type="Script" uid="uid://cwetulvaiv31w" path="res://scripts/player_deck.gd" id="1_ku7ly"]
+[ext_resource type="Texture2D" uid="uid://cb1yxcyj0xpgl" path="res://assets/sprites/Deck.png" id="2_nc2mx"]
+
+[node name="OpponentDeck" type="Node2D" unique_id=889542571]
+script = ExtResource("1_ku7ly")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=950411534]
+z_index = -1
+scale = Vector2(0.16666664, 0.18867925)
+texture = ExtResource("2_nc2mx")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1383791978]
+modulate = Color(0, 0, 0, 1)
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

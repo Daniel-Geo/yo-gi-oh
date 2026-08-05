@@ -37,10 +37,11 @@ func draw_card() -> void:
 		collision_shape_2d.disabled = true
 	
 	rich_text_label.text = str(player_deck.size())
-	var card_scene = preload("res://scenes/card.tscn")
+	var card_scene = preload("res://scenes/player_card.tscn")
 	var new_card = card_scene.instantiate()
 	var card_image_path = "res://assets/sprites/" + card_drawn_name + ".png"
 	new_card.get_node("%CardImage").texture = load(card_image_path)
+	new_card.get_node("%CardImage").visible = false
 	new_card.get_node("%Attack").text = str(CardDatabase.CARDS[card_drawn_name][0])
 	new_card.get_node("%Health").text = str(CardDatabase.CARDS[card_drawn_name][1])
 	new_card.card_type = CardDatabase.CARDS[card_drawn_name][2] as CardDatabase.CardTypes

@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://gta1ip5cxcd7" path="res://scripts/card_manager.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://b1fuvjby8iyf2" path="res://scripts/player_hand.gd" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cuc1ghl78n6uu" path="res://scenes/card_slot.tscn" id="3_sugp2"]
-[ext_resource type="PackedScene" uid="uid://c8djftd5iclyn" path="res://scenes/deck.tscn" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://cq2kaoji77rer" path="res://scripts/opponent_hand.gd" id="4_85g3d"]
+[ext_resource type="PackedScene" uid="uid://c8djftd5iclyn" path="res://scenes/player_deck.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cnh5d5xwt5eke" path="res://scenes/opponent_deck.tscn" id="5_o6xl0"]
 [ext_resource type="Script" uid="uid://bgywb8rmhmodi" path="res://scripts/input_manager.gd" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://bydw1p0yl3822" path="res://scripts/opponent_deck.gd" id="7_choun"]
+[ext_resource type="Script" uid="uid://ck15hd1r7icmo" path="res://scripts/battle_manager.gd" id="7_tipki"]
 
 [node name="Main" type="Node2D" unique_id=1701905270]
 
@@ -128,15 +132,17 @@ card_slot_type = 1
 [node name="PlayerHand" type="Node2D" parent="." unique_id=2012680316]
 script = ExtResource("3_jyhfs")
 
+[node name="OpponentHand" type="Node2D" parent="." unique_id=1279660510]
+script = ExtResource("4_85g3d")
+
 [node name="PlayerDeck" parent="." unique_id=889542571 instance=ExtResource("4_jyhfs")]
 position = Vector2(-225, 112)
 scale = Vector2(0.8, 0.8)
 
-[node name="OpponentDeck" parent="." unique_id=1527358891 instance=ExtResource("4_jyhfs")]
-process_mode = 4
-position = Vector2(225, -110)
+[node name="OpponentDeck" parent="." unique_id=810894020 instance=ExtResource("5_o6xl0")]
+position = Vector2(225, -112)
 scale = Vector2(0.8, 0.8)
-script = null
+script = ExtResource("7_choun")
 
 [node name="InputManager" type="Node2D" parent="." unique_id=665685683]
 script = ExtResource("5_tbgi4")
@@ -159,3 +165,11 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "End Turn"
+
+[node name="BattleManager" type="Node" parent="." unique_id=673879994]
+script = ExtResource("7_tipki")
+
+[node name="BattleTimer" type="Timer" parent="." unique_id=697887597]
+one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]

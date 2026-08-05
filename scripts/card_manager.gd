@@ -40,6 +40,7 @@ func finish_drag() -> void:
 	if card_slot and not card_slot.is_card_in_card_slot:
 		if card_being_dragged.card_type == card_slot.card_slot_type:
 			if not has_played_monster_card_this_turn:
+				has_played_monster_card_this_turn = true
 				is_hovering_on_card = false
 				card_being_dragged.is_in_card_slot = true
 				card_being_dragged.scale = Vector2(card_slot_scale, card_slot_scale)
@@ -81,7 +82,7 @@ func highlight_card(card, hovered) -> void:
 		card.scale = Vector2(card_default_scale, card_default_scale)
 		card.z_index = 1
 
-func raycast_check(collision_mask):
+func raycast_check(collision_mask) -> Node2D:
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = get_global_mouse_position()
