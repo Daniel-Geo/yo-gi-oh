@@ -10,6 +10,7 @@ extends Node2D
 @onready var camera_2d: Camera2D = $"../Camera2D"
 @onready var input_manager: Node2D = $"../InputManager"
 @onready var card_draw_speed: float = $"../PlayerDeck".card_draw_speed
+@onready var battle_manager: Node = $"../BattleManager"
 
 var screen_size: Vector2
 var card_being_dragged: Node2D
@@ -43,12 +44,14 @@ func finish_drag() -> void:
 				has_played_monster_card_this_turn = true
 				is_hovering_on_card = false
 				card_being_dragged.is_in_card_slot = true
+				card_being_dragged.card_slot_card_is_in = card_slot
 				card_being_dragged.scale = Vector2(card_slot_scale, card_slot_scale)
 				card_being_dragged.z_index = -1
 				player_hand.remove_card_from_hand(card_being_dragged)
 				card_being_dragged.position = card_slot.position
 				card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 				card_slot.is_card_in_card_slot = true
+				battle_manager.player_cards_on_battlefield.append(card_being_dragged)
 				card_being_dragged = null
 				return
 	

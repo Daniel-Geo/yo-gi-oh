@@ -6,6 +6,9 @@ signal hovered_off
 var starting_position: Vector2
 var is_in_card_slot: bool = false
 var card_type: CardDatabase.CardTypes
+var card_slot_card_is_in: Node2D
+var health: int
+var attack: int
 
 func _ready() -> void:
 	get_parent().connect_card_signals(self)

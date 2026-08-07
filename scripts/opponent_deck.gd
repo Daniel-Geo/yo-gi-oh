@@ -34,8 +34,9 @@ func draw_card() -> void:
 	new_card.get_node("%CardImage").texture = load(card_image_path)
 	new_card.get_node("%CardImage").visible = false
 	new_card.attack = CardDatabase.CARDS[card_drawn_name][0]
+	new_card.health = CardDatabase.CARDS[card_drawn_name][1]
 	new_card.get_node("%Attack").text = str(new_card.attack)
-	new_card.get_node("%Health").text = str(CardDatabase.CARDS[card_drawn_name][1])
+	new_card.get_node("%Health").text = str(new_card.health)
 	new_card.card_type = CardDatabase.CARDS[card_drawn_name][2] as CardDatabase.CardTypes
 	card_manager.add_child(new_card)
 	new_card.name = "card"
