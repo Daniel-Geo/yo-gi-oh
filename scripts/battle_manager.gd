@@ -17,10 +17,14 @@ extends Node
 @onready var opponent_health_label: RichTextLabel = $"../CanvasLayer/MarginContainer/OpponentHealth"
 @onready var player_graveyard: Node2D = $"../PlayerGraveyard"
 @onready var opponent_graveyard: Node2D = $"../OpponentGraveyard"
+@onready var end_screen: Control = $"../CanvasLayer/EndScreen"
 
+var is_player_turn: bool = true
+var is_player_attacking: bool = false
 var empty_monster_card_slots: Array
 var player_cards_on_battlefield: Array
 var opponent_cards_on_battlefield: Array
+var player_cards_attacked_this_turn: Array
 
 func _ready() -> void:
 	player_health_label.text = str(player_health)
@@ -29,8 +33,7 @@ func _ready() -> void:
 		empty_monster_card_slots.append(card_slot)
 
 func opponent_turn() -> void:
-	end_turn_button.disabled = true
-	end_turn_button.visible = false
+	enable_end_turn_button(false)
 	
 	if opponent_deck.opponent_deck.size() != 0:
 		opponent_deck.draw_card()
@@ -47,8 +50,13 @@ func opponent_turn() -> void:
 				await direct_attack(card, "opponent")
 			else:
 				var card_to_attack = player_cards_on_battlefield.pick_random()
-				attack(card, card_to_attack, "opponent")
-	
+				await attack(card, card_to_attack, "opponent")
+	if player_health == 0:
+		end_screen.show_end_screen("lost")
+		return
+	elif opponent_health == 0:
+		end_screen.show_end_screen("win")
+		return
 	end_opponent_turn()
 
 func wait(wait_time) -> void:
@@ -63,9 +71,12 @@ func direct_attack(attacking_card, attacker) -> void:
 		player_health = max(0, player_health - attacking_card.attack)
 		player_health_label.text = str(player_health)
 	else:
-		new_pos_y = 0
+		is_player_attacking = true
+		enable_end_turn_button(false)
+		new_pos_y = -120
 		opponent_health = max(0, opponent_health - attacking_card.attack)
 		opponent_health_label.text = str(opponent_health)
+		player_cards_attacked_this_turn.append(attacking_card)
 	var new_pos = Vector2(attacking_card.position.x, new_pos_y)
 	attacking_card.z_index = 2
 	
@@ -77,8 +88,24 @@ func direct_attack(attacking_card, attacker) -> void:
 	tween2.tween_property(attacking_card, "position", attacking_card.card_slot_card_is_in.position, card_move_speed)
 	attacking_card.z_index = 0
 	await wait(1)
+	
+	if player_health == 0:
+		end_screen.show_end_screen("lost")
+		return
+	elif opponent_health == 0:
+		end_screen.show_end_screen("win")
+		return
+	
+	if attacker == "player":
+		is_player_attacking = false
+		enable_end_turn_button(true)
 
 func attack(attacking_card, defending_card, attacker) -> void:
+	if attacker == "player":
+		is_player_attacking = true
+		card_manager.selected_monster = null
+		enable_end_turn_button(false)
+		player_cards_attacked_this_turn.append(attacking_card)
 	attacking_card.z_index = 2
 	var new_pos = Vector2(defending_card.position.x, defending_card.position.y + battle_position_offset)
 	var tween = get_tree().create_tween()
@@ -106,23 +133,34 @@ func attack(attacking_card, defending_card, attacker) -> void:
 	
 	if card_was_destroyed:
 		await wait(1)
+	
+	if attacker == "player":
+		is_player_attacking = false
+		enable_end_turn_button(true)
 
 
 func destroy_card(card, card_owner) -> void:
 	var new_pos: Vector2
 	if card_owner == "player":
+		card.defeated = true
+		card.get_node("Area2D/CollisionShape2D").disabled = true
 		new_pos = player_graveyard.position
-		if card in player_cards_on_battlefield:
-			player_cards_on_battlefield.erase(card)
+		player_cards_on_battlefield.erase(card)
+		card.card_slot_card_is_in.get_node("Area2D/CollisionShape2D").disabled = false
 	else:
 		new_pos = opponent_graveyard.position
-		if card in opponent_cards_on_battlefield:
-			opponent_cards_on_battlefield.erase(card)
+		opponent_cards_on_battlefield.erase(card)
 	
 	card.card_slot_card_is_in.is_card_in_card_slot = false
 	card.card_slot_card_is_in = null
 	var tween = get_tree().create_tween()
 	tween.tween_property(card, "position", new_pos, card_move_speed)
+	card.z_index = -1
+
+func opponent_card_selected(defending_card):
+	var attacking_card = card_manager.selected_monster
+	if attacking_card and defending_card in opponent_cards_on_battlefield and not is_player_attacking:
+		attack(attacking_card, defending_card, "player")
 
 func try_play_highest_attack_card() -> void:
 	if opponent_hand.opponent_hand.size() == 0:
@@ -147,10 +185,17 @@ func try_play_highest_attack_card() -> void:
 	opponent_cards_on_battlefield.append(highest_attack_card)
 
 func end_opponent_turn() -> void:
+	is_player_turn = true
 	player_deck.has_drawn_card_this_turn = false
 	card_manager.has_played_monster_card_this_turn = false
-	end_turn_button.disabled = false
-	end_turn_button.visible = true
+	enable_end_turn_button(true)
 
 func _on_end_turn_button_pressed() -> void:
+	is_player_turn = false
+	card_manager.unselect_monster()
+	player_cards_attacked_this_turn.clear()
 	opponent_turn()
+
+func enable_end_turn_button(is_enabled: bool) -> void:
+	end_turn_button.disabled = not is_enabled
+	end_turn_button.visible = is_enabled

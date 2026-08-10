@@ -7,6 +7,7 @@
 size = Vector2(30, 50)
 
 [node name="CardSlot" type="Node2D" unique_id=1162383417]
+z_index = -2
 script = ExtResource("1_cypty")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=344570579]
