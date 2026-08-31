@@ -1,11 +1,11 @@
 extends Node2D
 
+@export var card_draw_speed: float = 0.2
 @export var card_width: float = 35
 @export var opponent_hand_y_position: float = -112
 
 @onready var card_manager: Node2D = $"../CardManager"
 @onready var camera_2d: Camera2D = $"../Camera2D"
-@onready var card_draw_speed: float = $"../PlayerDeck".card_draw_speed
 
 var opponent_hand: Array = []
 var center_screen_x: float

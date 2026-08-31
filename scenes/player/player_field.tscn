@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://cpchagyphi3c0"]
+
+[ext_resource type="Script" uid="uid://gta1ip5cxcd7" path="res://scripts/card/card_manager.gd" id="1_qe4mp"]
+[ext_resource type="Script" uid="uid://by1tquffrt1qr" path="res://scripts/game_setup.gd" id="1_r2qjp"]
+[ext_resource type="PackedScene" uid="uid://cuc1ghl78n6uu" path="res://scenes/card_slot.tscn" id="2_erhd2"]
+[ext_resource type="Script" uid="uid://b1fuvjby8iyf2" path="res://scripts/player/player_hand.gd" id="3_xhjue"]
+[ext_resource type="PackedScene" uid="uid://cfi0gua6eyvw1" path="res://scenes/player/player_deck.tscn" id="4_rpubd"]
+[ext_resource type="Texture2D" uid="uid://bw8rmybgmiqh8" path="res://assets/sprites/CardSlot.png" id="5_alpbj"]
+[ext_resource type="Script" uid="uid://bgywb8rmhmodi" path="res://scripts/input_manager.gd" id="6_pfs4d"]
+[ext_resource type="PackedScene" uid="uid://o8wy22o1b4xv" path="res://scenes/end_screen.tscn" id="7_oexhy"]
+[ext_resource type="Script" uid="uid://ck15hd1r7icmo" path="res://scripts/battle_manager.gd" id="8_8nv6h"]
+
+[node name="PlayerField" type="Node2D" unique_id=1870312217]
+script = ExtResource("1_r2qjp")
+
+[node name="CardManager" type="Node2D" parent="." unique_id=664231052]
+script = ExtResource("1_qe4mp")
+
+[node name="PlayerCardSlots" type="Node2D" parent="." unique_id=40741591]
+
+[node name="MonsterCardSlots" type="Node2D" parent="PlayerCardSlots" unique_id=200711819]
+
+[node name="CardSlot" parent="PlayerCardSlots/MonsterCardSlots" unique_id=1162383417 instance=ExtResource("2_erhd2")]
+position = Vector2(-70, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot2" parent="PlayerCardSlots/MonsterCardSlots" unique_id=1332614327 instance=ExtResource("2_erhd2")]
+position = Vector2(-35, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot3" parent="PlayerCardSlots/MonsterCardSlots" unique_id=1627831307 instance=ExtResource("2_erhd2")]
+position = Vector2(0, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot4" parent="PlayerCardSlots/MonsterCardSlots" unique_id=165099442 instance=ExtResource("2_erhd2")]
+position = Vector2(35, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot5" parent="PlayerCardSlots/MonsterCardSlots" unique_id=378459484 instance=ExtResource("2_erhd2")]
+position = Vector2(70, 25)
+scale = Vector2(0.8, 0.8)
+
+[node name="MagicCardSlots" type="Node2D" parent="PlayerCardSlots" unique_id=1766135837]
+
+[node name="CardSlot" parent="PlayerCardSlots/MagicCardSlots" unique_id=457143848 instance=ExtResource("2_erhd2")]
+position = Vector2(-70, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot2" parent="PlayerCardSlots/MagicCardSlots" unique_id=1833726311 instance=ExtResource("2_erhd2")]
+position = Vector2(-35, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot3" parent="PlayerCardSlots/MagicCardSlots" unique_id=1274012992 instance=ExtResource("2_erhd2")]
+position = Vector2(0, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot4" parent="PlayerCardSlots/MagicCardSlots" unique_id=1441421779 instance=ExtResource("2_erhd2")]
+position = Vector2(35, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot5" parent="PlayerCardSlots/MagicCardSlots" unique_id=1797067725 instance=ExtResource("2_erhd2")]
+position = Vector2(70, 68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="PlayerHand" type="Node2D" parent="." unique_id=211367921]
+script = ExtResource("3_xhjue")
+
+[node name="PlayerDeck" parent="." unique_id=889542571 instance=ExtResource("4_rpubd")]
+position = Vector2(-225, 112)
+scale = Vector2(0.8, 0.8)
+
+[node name="DeckTimer" type="Timer" parent="PlayerDeck" unique_id=678054350]
+one_shot = true
+
+[node name="PlayerGraveyard" type="Node2D" parent="." unique_id=804481660]
+z_index = -2
+position = Vector2(100, 46)
+scale = Vector2(0.8, 0.8)
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerGraveyard" unique_id=225292167]
+scale = Vector2(0.16666664, 0.18867925)
+texture = ExtResource("5_alpbj")
+
+[node name="InputManager" type="Node2D" parent="." unique_id=2141426766]
+script = ExtResource("6_pfs4d")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=678784475]
+zoom = Vector2(4, 4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1021477019]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=801752363]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="EndTurnButton" type="Button" parent="CanvasLayer/MarginContainer" unique_id=2088339470]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+text = "End Turn"
+
+[node name="PlayerHealth" type="RichTextLabel" parent="CanvasLayer/MarginContainer" unique_id=118055200]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 64
+text = "0"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndScreen" parent="CanvasLayer" unique_id=1662831838 instance=ExtResource("7_oexhy")]
+visible = false
+
+[node name="BattleManager" type="Node" parent="." unique_id=1224126898]
+script = ExtResource("8_8nv6h")
+
+[node name="BattleTimer" type="Timer" parent="." unique_id=1230017391]
+one_shot = true

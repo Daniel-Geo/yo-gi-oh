@@ -28,10 +28,11 @@ var opponent_cards_on_battlefield: Array
 var player_cards_attacked_this_turn: Array
 
 func _ready() -> void:
-	player_health_label.text = str(player_health)
-	opponent_health_label.text = str(opponent_health)
-	for card_slot in monster_card_slots.get_children():
-		empty_monster_card_slots.append(card_slot)
+	pass
+	#player_health_label.text = str(player_health)
+	#opponent_health_label.text = str(opponent_health)
+	#for card_slot in monster_card_slots.get_children():
+		#empty_monster_card_slots.append(card_slot)
 
 func opponent_turn() -> void:
 	input_manager.input_disabled = true

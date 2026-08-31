@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://c7mr15vg75nwm"]
+
+[ext_resource type="PackedScene" uid="uid://cuc1ghl78n6uu" path="res://scenes/card_slot.tscn" id="2_myng3"]
+[ext_resource type="Script" uid="uid://cq2kaoji77rer" path="res://scripts/opponent/opponent_hand.gd" id="3_7dba5"]
+[ext_resource type="PackedScene" uid="uid://cnh5d5xwt5eke" path="res://scenes/opponent/opponent_deck.tscn" id="4_1xnd4"]
+[ext_resource type="Script" uid="uid://bydw1p0yl3822" path="res://scripts/opponent/opponent_deck.gd" id="5_wx14n"]
+[ext_resource type="Texture2D" uid="uid://bw8rmybgmiqh8" path="res://assets/sprites/CardSlot.png" id="6_cdiv0"]
+[ext_resource type="Script" uid="uid://bgywb8rmhmodi" path="res://scripts/input_manager.gd" id="7_kcrlb"]
+
+[node name="OpponentField" type="Node2D" unique_id=1923962278]
+
+[node name="CardManager" type="Node2D" parent="." unique_id=1673737768]
+
+[node name="OpponentCardSlots" type="Node2D" parent="." unique_id=616139986]
+
+[node name="MonsterCardSlots" type="Node2D" parent="OpponentCardSlots" unique_id=1091345697]
+
+[node name="CardSlot" parent="OpponentCardSlots/MonsterCardSlots" unique_id=1162383417 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(-70, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot2" parent="OpponentCardSlots/MonsterCardSlots" unique_id=1706802160 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(-35, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot3" parent="OpponentCardSlots/MonsterCardSlots" unique_id=1181174981 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(0, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot4" parent="OpponentCardSlots/MonsterCardSlots" unique_id=1925979245 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(35, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot5" parent="OpponentCardSlots/MonsterCardSlots" unique_id=782954818 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(70, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="MagicCardSlots" type="Node2D" parent="OpponentCardSlots" unique_id=1854242397]
+
+[node name="CardSlot" parent="OpponentCardSlots/MagicCardSlots" unique_id=1990937161 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(-70, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot2" parent="OpponentCardSlots/MagicCardSlots" unique_id=1589534145 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(-35, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot3" parent="OpponentCardSlots/MagicCardSlots" unique_id=919522286 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(0, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot4" parent="OpponentCardSlots/MagicCardSlots" unique_id=1020943424 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(35, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot5" parent="OpponentCardSlots/MagicCardSlots" unique_id=448842728 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(70, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="OpponentHand" type="Node2D" parent="." unique_id=158029859]
+script = ExtResource("3_7dba5")
+
+[node name="OpponentDeck" parent="." unique_id=889542571 instance=ExtResource("4_1xnd4")]
+unique_name_in_owner = true
+position = Vector2(225, -112)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("5_wx14n")
+
+[node name="OpponentGraveyard" type="Node2D" parent="." unique_id=721622617]
+z_index = -2
+position = Vector2(-100, -46)
+scale = Vector2(0.8, 0.8)
+
+[node name="Sprite2D" type="Sprite2D" parent="OpponentGraveyard" unique_id=682710130]
+scale = Vector2(0.16666664, 0.18867925)
+texture = ExtResource("6_cdiv0")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1545154524]
+zoom = Vector2(4, 4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=699561636]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=680829376]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="OpponentHealth" type="RichTextLabel" parent="CanvasLayer/MarginContainer" unique_id=232677688]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 64
+text = "0"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputManager" type="Node2D" parent="." unique_id=680484586]
+script = ExtResource("7_kcrlb")

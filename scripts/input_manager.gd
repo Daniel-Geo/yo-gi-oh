@@ -11,7 +11,7 @@ signal left_mouse_button_released
 @onready var deck: Node2D = $"../PlayerDeck"
 @onready var battle_manager: Node = $"../BattleManager"
 
-var input_disabled: bool = false
+var input_disabled: bool = true
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -36,7 +36,7 @@ func raycast_at_cursor():
 			if card:
 				card_manager.card_clicked(card)
 		elif result_collision_mask == deck_collision_mask:
-			deck.draw_card()
+			deck.deck_clicked()
 		elif result_collision_mask == opponent_card_collision_mask:
 			battle_manager.opponent_card_selected(result[0].collider.get_parent())
 	return null

@@ -9,24 +9,22 @@ extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D
 @onready var rich_text_label: RichTextLabel = $RichTextLabel
+@onready var deck_timer: Timer = $DeckTimer
 
 var player_deck: Array = ["knight", "archer", "demon", "knight", "archer", "demon", "knight", "tornado", "tornado", "tornado"]
 var has_drawn_card_this_turn: bool = false
 
 func _ready() -> void:
 	player_deck.shuffle()
-	rich_text_label.text = str(player_deck.size())
+	#rich_text_label.text = str(player_deck.size())
 	
-	for i in range(starting_hand_size):
-		draw_card()
-		has_drawn_card_this_turn = false
-	has_drawn_card_this_turn = true
+	#for i in range(starting_hand_size):
+		#draw_card()
+		#has_drawn_card_this_turn = false
+	#has_drawn_card_this_turn = true
 
 
 func draw_card() -> void:
-	if has_drawn_card_this_turn:
-		return
-	
 	has_drawn_card_this_turn = true
 	var card_drawn_name = player_deck[0]
 	player_deck.erase(card_drawn_name)
@@ -37,7 +35,7 @@ func draw_card() -> void:
 		collision_shape_2d.disabled = true
 	
 	rich_text_label.text = str(player_deck.size())
-	var card_scene = preload("res://scenes/player_card.tscn")
+	var card_scene = preload("res://scenes/player/player_card.tscn")
 	var new_card = card_scene.instantiate()
 	var card_image_path = "res://assets/sprites/" + card_drawn_name + ".png"
 	new_card.get_node("%CardImage").texture = load(card_image_path)
@@ -62,3 +60,31 @@ func draw_card() -> void:
 	new_card.name = "card"
 	player_hand.add_card_to_hand(new_card, card_draw_speed)
 	new_card.get_node("AnimationPlayer").play("card_flip")
+
+func draw_initial_hand() -> void:
+	deck_timer.start()
+	await deck_timer.timeout
+	deck_timer.wait_time = 0.1
+	
+	var player_id = multiplayer.get_unique_id()
+	for i in range(starting_hand_size):
+		draw_here_and_for_peer_opponent(player_id)
+		rpc("draw_here_and_for_peer_opponent", player_id)
+		has_drawn_card_this_turn = false
+		deck_timer.start()
+		await deck_timer.timeout
+	has_drawn_card_this_turn = true
+
+@rpc("any_peer")
+func draw_here_and_for_peer_opponent(player_id: int) -> void:
+	if multiplayer.get_unique_id() == player_id:
+		draw_card()
+	else:
+		get_parent().get_parent().get_node("OpponentField/OpponentDeck").draw_card()
+
+func deck_clicked() -> void:
+	if has_drawn_card_this_turn:
+		return
+	var player_id = multiplayer.get_unique_id()
+	draw_here_and_for_peer_opponent(player_id)
+	rpc("draw_here_and_for_peer_opponent", player_id)

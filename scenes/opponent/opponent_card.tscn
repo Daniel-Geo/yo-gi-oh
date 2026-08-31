@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://c7xa64vdnuur2"]
+[gd_scene format=3 uid="uid://ivlul7euqwi"]
 
-[ext_resource type="Script" uid="uid://ciddjv8nct004" path="res://scripts/opponent_card.gd" id="1_snj32"]
-[ext_resource type="Texture2D" uid="uid://bl20fjeqopif4" path="res://assets/sprites/knight.png" id="2_80w62"]
-[ext_resource type="Texture2D" uid="uid://cb1yxcyj0xpgl" path="res://assets/sprites/Deck.png" id="3_32nxw"]
+[ext_resource type="Script" uid="uid://ciddjv8nct004" path="res://scripts/opponent/opponent_card.gd" id="1_ergfr"]
+[ext_resource type="Texture2D" uid="uid://bl20fjeqopif4" path="res://assets/sprites/knight.png" id="2_i728x"]
+[ext_resource type="Texture2D" uid="uid://cb1yxcyj0xpgl" path="res://assets/sprites/Deck.png" id="3_wl15j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h62n"]
 bg_color = Color(0.13501206, 0.13501206, 0.13501206, 1)
@@ -206,7 +206,7 @@ _data = {
 [node name="OpponentCard" type="Node2D" unique_id=867219664]
 position = Vector2(225, -110)
 scale = Vector2(0.8, 0.8)
-script = ExtResource("1_snj32")
+script = ExtResource("1_ergfr")
 
 [node name="Panel" type="Panel" parent="." unique_id=781439051]
 anchors_preset = -1
@@ -278,12 +278,12 @@ vertical_alignment = 2
 [node name="CardImage" type="Sprite2D" parent="Panel" unique_id=1672238433]
 unique_name_in_owner = true
 position = Vector2(15, 6)
-texture = ExtResource("2_80w62")
+texture = ExtResource("2_i728x")
 
 [node name="CardBackImage" type="Sprite2D" parent="." unique_id=940135407]
 position = Vector2(0.5, 0)
 scale = Vector2(0.167, 0.189)
-texture = ExtResource("3_32nxw")
+texture = ExtResource("3_wl15j")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1783155777]
 collision_layer = 8

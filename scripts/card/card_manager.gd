@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var card_draw_speed: float = 0.2
 @export var card_collision_mask: int = 1
 @export var card_slot_collision_mask: int = 2
 @export var card_default_scale: float = 0.8
@@ -10,7 +11,6 @@ extends Node2D
 @onready var player_hand: Node2D = $"../PlayerHand"
 @onready var camera_2d: Camera2D = $"../Camera2D"
 @onready var input_manager: Node2D = $"../InputManager"
-@onready var card_draw_speed: float = $"../PlayerDeck".card_draw_speed
 @onready var battle_manager: Node = $"../BattleManager"
 
 var screen_size: Vector2

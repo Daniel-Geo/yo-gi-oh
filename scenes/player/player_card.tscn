@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://bqbb84nebjtkv"]
+[gd_scene format=3 uid="uid://n2ev1vkp4qrn"]
 
-[ext_resource type="Script" uid="uid://cwlpkuwitp7ko" path="res://scripts/player_card.gd" id="1_kx8ed"]
-[ext_resource type="Texture2D" uid="uid://bl20fjeqopif4" path="res://assets/sprites/knight.png" id="2_nx7or"]
-[ext_resource type="Texture2D" uid="uid://cb1yxcyj0xpgl" path="res://assets/sprites/Deck.png" id="3_foft5"]
+[ext_resource type="Script" uid="uid://cwlpkuwitp7ko" path="res://scripts/player/player_card.gd" id="1_6p8bx"]
+[ext_resource type="Texture2D" uid="uid://bl20fjeqopif4" path="res://assets/sprites/knight.png" id="2_18xlc"]
+[ext_resource type="Texture2D" uid="uid://cb1yxcyj0xpgl" path="res://assets/sprites/Deck.png" id="3_ksxom"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0h62n"]
 bg_color = Color(0.13501206, 0.13501206, 0.13501206, 1)
@@ -206,7 +206,7 @@ _data = {
 [node name="PlayerCard" type="Node2D" unique_id=867219664]
 position = Vector2(-225, 110)
 scale = Vector2(0.8, 0.8)
-script = ExtResource("1_kx8ed")
+script = ExtResource("1_6p8bx")
 
 [node name="Panel" type="Panel" parent="." unique_id=781439051]
 anchors_preset = -1
@@ -289,13 +289,13 @@ vertical_alignment = 2
 [node name="CardImage" type="Sprite2D" parent="Panel" unique_id=1672238433]
 unique_name_in_owner = true
 position = Vector2(15, 6)
-texture = ExtResource("2_nx7or")
+texture = ExtResource("2_18xlc")
 
 [node name="CardBackImage" type="Sprite2D" parent="." unique_id=940135407]
 visible = false
 position = Vector2(0.5, 0)
 scale = Vector2(0.167, 0.189)
-texture = ExtResource("3_foft5")
+texture = ExtResource("3_ksxom")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=755494646]
 

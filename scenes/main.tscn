@@ -1,171 +1,13 @@
 [gd_scene format=3 uid="uid://bgymariqgmtgo"]
 
-[ext_resource type="Script" uid="uid://gta1ip5cxcd7" path="res://scripts/card_manager.gd" id="1_0wfyh"]
-[ext_resource type="Script" uid="uid://b1fuvjby8iyf2" path="res://scripts/player_hand.gd" id="3_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://cuc1ghl78n6uu" path="res://scenes/card_slot.tscn" id="3_sugp2"]
-[ext_resource type="Script" uid="uid://cq2kaoji77rer" path="res://scripts/opponent_hand.gd" id="4_85g3d"]
-[ext_resource type="PackedScene" uid="uid://c8djftd5iclyn" path="res://scenes/player_deck.tscn" id="4_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://cnh5d5xwt5eke" path="res://scenes/opponent_deck.tscn" id="5_o6xl0"]
-[ext_resource type="Script" uid="uid://bgywb8rmhmodi" path="res://scripts/input_manager.gd" id="5_tbgi4"]
-[ext_resource type="Script" uid="uid://bydw1p0yl3822" path="res://scripts/opponent_deck.gd" id="7_choun"]
-[ext_resource type="Script" uid="uid://ck15hd1r7icmo" path="res://scripts/battle_manager.gd" id="7_tipki"]
-[ext_resource type="Texture2D" uid="uid://bw8rmybgmiqh8" path="res://assets/sprites/CardSlot.png" id="8_choun"]
-[ext_resource type="PackedScene" uid="uid://o8wy22o1b4xv" path="res://scenes/end_screen.tscn" id="10_ya4ey"]
+[ext_resource type="Script" uid="uid://dnv5rsmnffgl3" path="res://scripts/multiplayer.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://cpchagyphi3c0" path="res://scenes/player/player_field.tscn" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://c7mr15vg75nwm" path="res://scenes/opponent/opponent_field.tscn" id="3_sugp2"]
 
 [node name="Main" type="Node2D" unique_id=1701905270]
-
-[node name="CardManager" type="Node2D" parent="." unique_id=135606361]
-script = ExtResource("1_0wfyh")
-
-[node name="CardSlots" type="Node2D" parent="." unique_id=1929826168]
-
-[node name="OpponentCardSlots" type="Node2D" parent="CardSlots" unique_id=400342302]
-
-[node name="MonsterCardSlots" type="Node2D" parent="CardSlots/OpponentCardSlots" unique_id=1986593213]
-
-[node name="CardSlot" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=580510374 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(-70, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot2" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=1293426019 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(-35, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot3" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=1114910881 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(0, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot4" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=277573807 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(35, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot5" parent="CardSlots/OpponentCardSlots/MonsterCardSlots" unique_id=730114992 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(70, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="MagicCardSlots" type="Node2D" parent="CardSlots/OpponentCardSlots" unique_id=788078365]
-
-[node name="CardSlot" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=1162383417 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(-70, -68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot2" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=1278083166 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(-35, -68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot3" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=399956106 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(0, -68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot4" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=613495783 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(35, -68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot5" parent="CardSlots/OpponentCardSlots/MagicCardSlots" unique_id=640056525 instance=ExtResource("3_sugp2")]
-process_mode = 4
-position = Vector2(70, -68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="PlayerCardSlots" type="Node2D" parent="CardSlots" unique_id=1562009555]
-
-[node name="MonsterCardSlots" type="Node2D" parent="CardSlots/PlayerCardSlots" unique_id=1189236044]
-
-[node name="CardSlot" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=2045150089 instance=ExtResource("3_sugp2")]
-position = Vector2(-70, 25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot2" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=1694820968 instance=ExtResource("3_sugp2")]
-position = Vector2(-35, 25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot3" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=1975200265 instance=ExtResource("3_sugp2")]
-position = Vector2(0, 25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot4" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=1983319832 instance=ExtResource("3_sugp2")]
-position = Vector2(35, 25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot5" parent="CardSlots/PlayerCardSlots/MonsterCardSlots" unique_id=588342407 instance=ExtResource("3_sugp2")]
-position = Vector2(70, 25)
-scale = Vector2(0.8, 0.8)
-
-[node name="MagicCardSlots" type="Node2D" parent="CardSlots/PlayerCardSlots" unique_id=1139387362]
-
-[node name="CardSlot" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=448970929 instance=ExtResource("3_sugp2")]
-position = Vector2(-70, 68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot2" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=1903866420 instance=ExtResource("3_sugp2")]
-position = Vector2(-35, 68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot3" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=976115019 instance=ExtResource("3_sugp2")]
-position = Vector2(0, 68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot4" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=320155561 instance=ExtResource("3_sugp2")]
-position = Vector2(35, 68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot5" parent="CardSlots/PlayerCardSlots/MagicCardSlots" unique_id=1861675684 instance=ExtResource("3_sugp2")]
-position = Vector2(70, 68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="PlayerHand" type="Node2D" parent="." unique_id=2012680316]
-script = ExtResource("3_jyhfs")
-
-[node name="OpponentHand" type="Node2D" parent="." unique_id=1279660510]
-script = ExtResource("4_85g3d")
-
-[node name="PlayerDeck" parent="." unique_id=889542571 instance=ExtResource("4_jyhfs")]
-position = Vector2(-225, 112)
-scale = Vector2(0.8, 0.8)
-
-[node name="OpponentDeck" parent="." unique_id=810894020 instance=ExtResource("5_o6xl0")]
-position = Vector2(225, -112)
-scale = Vector2(0.8, 0.8)
-script = ExtResource("7_choun")
-
-[node name="PlayerGraveyard" type="Node2D" parent="." unique_id=110230930]
-z_index = -2
-position = Vector2(100, 46)
-scale = Vector2(0.8, 0.8)
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerGraveyard" unique_id=2024897292]
-scale = Vector2(0.16666664, 0.18867925)
-texture = ExtResource("8_choun")
-
-[node name="OpponentGraveyard" type="Node2D" parent="." unique_id=1807240228]
-z_index = -2
-position = Vector2(-100, -46)
-scale = Vector2(0.8, 0.8)
-
-[node name="Sprite2D" type="Sprite2D" parent="OpponentGraveyard" unique_id=983311784]
-scale = Vector2(0.16666664, 0.18867925)
-texture = ExtResource("8_choun")
-
-[node name="InputManager" type="Node2D" parent="." unique_id=665685683]
-script = ExtResource("5_tbgi4")
+script = ExtResource("1_o5qli")
+player_field_scene = ExtResource("2_0wfyh")
+opponent_field_scene = ExtResource("3_sugp2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1144842882]
 zoom = Vector2(4, 4)
@@ -185,41 +27,22 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="EndTurnButton" type="Button" parent="CanvasLayer/MarginContainer" unique_id=681446308]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=67225210]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "End Turn"
+theme_override_constants/separation = 14
 
-[node name="PlayerHealth" type="RichTextLabel" parent="CanvasLayer/MarginContainer" unique_id=1014089052]
+[node name="Host" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1099055217]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_font_sizes/normal_font_size = 64
-text = "0"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 64
+text = "Host"
 
-[node name="OpponentHealth" type="RichTextLabel" parent="CanvasLayer/MarginContainer" unique_id=773864068]
+[node name="Join" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1357845643]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme_override_font_sizes/normal_font_size = 64
-text = "0"
-fit_content = true
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 64
+text = "Join"
 
-[node name="EndScreen" parent="CanvasLayer" unique_id=1662831838 instance=ExtResource("10_ya4ey")]
-visible = false
-
-[node name="BattleManager" type="Node" parent="." unique_id=673879994]
-script = ExtResource("7_tipki")
-
-[node name="BattleTimer" type="Timer" parent="." unique_id=697887597]
-one_shot = true
-
-[connection signal="pressed" from="CanvasLayer/MarginContainer/EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]

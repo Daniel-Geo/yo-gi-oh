@@ -9,15 +9,15 @@ extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var rich_text_label: RichTextLabel = $RichTextLabel
 
-var opponent_deck: Array = ["knight", "archer", "demon", "knight", "archer", "demon", "knight", "knight", "knight"]
+var opponent_deck: Array = ["knight", "archer", "demon", "knight", "archer", "demon", "knight", "tornado", "tornado", "tornado"]
+var deck_size: int
 
 func _ready() -> void:
 	opponent_deck.shuffle()
-	rich_text_label.text = str(opponent_deck.size())
+	#rich_text_label.text = str(opponent_deck.size())
 	
-	for i in range(starting_hand_size):
-		draw_card()
-
+	#for i in range(starting_hand_size):
+		#draw_card()
 
 func draw_card() -> void:
 	var card_drawn_name = opponent_deck[0]
@@ -28,7 +28,7 @@ func draw_card() -> void:
 		rich_text_label.visible = false
 	
 	rich_text_label.text = str(opponent_deck.size())
-	var card_scene = preload("res://scenes/opponent_card.tscn")
+	var card_scene = preload("res://scenes/opponent/opponent_card.tscn")
 	var new_card = card_scene.instantiate()
 	var card_image_path = "res://assets/sprites/" + card_drawn_name + ".png"
 	new_card.get_node("%CardImage").texture = load(card_image_path)
@@ -38,6 +38,12 @@ func draw_card() -> void:
 	new_card.get_node("%Attack").text = str(new_card.attack)
 	new_card.get_node("%Health").text = str(new_card.health)
 	new_card.card_type = CardDatabase.CARDS[card_drawn_name][2] as CardDatabase.CardTypes
+	if new_card.card_type == CardDatabase.CardTypes.MAGIC:
+		new_card.get_node("%Attack").visible = false
+		new_card.get_node("%Health").visible = false
+	else:
+		new_card.get_node("%Attack").visible = true
+		new_card.get_node("%Health").visible = true
 	card_manager.add_child(new_card)
 	new_card.name = "card"
 	opponent_hand.add_card_to_hand(new_card, card_draw_speed)
