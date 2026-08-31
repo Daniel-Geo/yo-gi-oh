@@ -34,7 +34,7 @@ func on_left_mouse_button_released() -> void:
 
 func card_clicked(card) -> void:
 	if card.card_slot_card_is_in:
-		if battle_manager.is_player_turn and not battle_manager.is_player_attacking:
+		if battle_manager.is_player_turn:
 			if not card in battle_manager.player_cards_attacked_this_turn:
 				if card.card_type == CardDatabase.CardTypes.MONSTER:
 					if battle_manager.opponent_cards_on_battlefield.size() == 0:
@@ -96,8 +96,9 @@ func finish_drag() -> void:
 			if card_being_dragged.card_type == CardDatabase.CardTypes.MONSTER:
 				battle_manager.player_cards_on_battlefield.append(card_being_dragged)
 				has_played_monster_card_this_turn = true
-			else:
-				card_being_dragged.ability_script.trigger_ability(battle_manager, input_manager, card_being_dragged)
+			
+			if card_being_dragged.ability_script:
+				card_being_dragged.ability_script.trigger_ability(battle_manager, input_manager, card_being_dragged, "card_placed")
 			card_being_dragged = null
 			return
 	

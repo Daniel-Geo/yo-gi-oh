@@ -6,6 +6,7 @@ extends Node
 @export var card_move_speed: float = 0.2
 @export var battle_position_offset: float = 25.0
 
+@onready var input_manager: Node2D = $"../InputManager"
 @onready var card_manager: Node2D = $"../CardManager"
 @onready var end_turn_button: Button = $"../CanvasLayer/MarginContainer/EndTurnButton"
 @onready var player_deck: Node2D = $"../PlayerDeck"
@@ -20,7 +21,7 @@ extends Node
 @onready var end_screen: Control = $"../CanvasLayer/EndScreen"
 
 var is_player_turn: bool = true
-var is_player_attacking: bool = false
+
 var empty_monster_card_slots: Array
 var player_cards_on_battlefield: Array
 var opponent_cards_on_battlefield: Array
@@ -33,6 +34,7 @@ func _ready() -> void:
 		empty_monster_card_slots.append(card_slot)
 
 func opponent_turn() -> void:
+	input_manager.input_disabled = true
 	enable_end_turn_button(false)
 	
 	if opponent_deck.opponent_deck.size() != 0:
@@ -71,7 +73,7 @@ func direct_attack(attacking_card, attacker) -> void:
 		player_health = max(0, player_health - attacking_card.attack)
 		player_health_label.text = str(player_health)
 	else:
-		is_player_attacking = true
+		input_manager.input_disabled = true
 		enable_end_turn_button(false)
 		new_pos_y = -120
 		opponent_health = max(0, opponent_health - attacking_card.attack)
@@ -97,13 +99,15 @@ func direct_attack(attacking_card, attacker) -> void:
 		return
 	
 	if attacker == "player":
-		is_player_attacking = false
+		if attacking_card.ability_script:
+			await attacking_card.ability_script.trigger_ability(self, input_manager, attacking_card, "card_attacked")
+		input_manager.input_disabled = false
 		enable_end_turn_button(true)
 
 func attack(attacking_card, defending_card, attacker) -> void:
 	if attacker == "player":
-		is_player_attacking = true
 		card_manager.selected_monster = null
+		input_manager.input_disabled = true
 		enable_end_turn_button(false)
 		player_cards_attacked_this_turn.append(attacking_card)
 	attacking_card.z_index = 2
@@ -135,7 +139,9 @@ func attack(attacking_card, defending_card, attacker) -> void:
 		await wait(1)
 	
 	if attacker == "player":
-		is_player_attacking = false
+		if attacking_card.ability_script:
+			await attacking_card.ability_script.trigger_ability(self, input_manager, attacking_card, "card_attacked")
+		input_manager.input_disabled = false
 		enable_end_turn_button(true)
 
 
@@ -159,7 +165,7 @@ func destroy_card(card, card_owner) -> void:
 
 func opponent_card_selected(defending_card):
 	var attacking_card = card_manager.selected_monster
-	if attacking_card and defending_card in opponent_cards_on_battlefield and not is_player_attacking:
+	if attacking_card and defending_card in opponent_cards_on_battlefield:
 		attack(attacking_card, defending_card, "player")
 
 func try_play_highest_attack_card() -> void:
@@ -188,10 +194,14 @@ func end_opponent_turn() -> void:
 	is_player_turn = true
 	player_deck.has_drawn_card_this_turn = false
 	card_manager.has_played_monster_card_this_turn = false
+	input_manager.input_disabled = false
 	enable_end_turn_button(true)
 
 func _on_end_turn_button_pressed() -> void:
 	is_player_turn = false
+	for card in player_cards_attacked_this_turn:
+		if card.ability_script:
+			card.ability_script.reset_ability()
 	card_manager.unselect_monster()
 	player_cards_attacked_this_turn.clear()
 	opponent_turn()

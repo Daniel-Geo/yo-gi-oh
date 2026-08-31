@@ -10,7 +10,7 @@ var is_in_card_slot: bool = false
 var defeated: bool = false
 var health: int
 var attack: int
-var ability_script
+var ability_script: Node
 
 func _ready() -> void:
 	get_parent().connect_card_signals(self)
