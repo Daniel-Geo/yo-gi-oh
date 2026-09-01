@@ -3,11 +3,15 @@ extends Node2D
 @export var player_field_scene: PackedScene
 @export var opponent_field_scene: PackedScene
 
-@onready var host: Button = $CanvasLayer/MarginContainer/VBoxContainer/Host
-@onready var join: Button = $CanvasLayer/MarginContainer/VBoxContainer/Join
+@onready var host: Button = $CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/Host
 
-const SERVER_ADDRESS: String = "localhost"
+@onready var host_ip_address: LineEdit = $CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer2/HostIPAddress
+@onready var join: Button = $CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer2/Join
+@onready var tip: Label = $CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer2/Tip
+
 const PORT: int = 1024
+
+var server_address: String
 
 var peer = ENetMultiplayerPeer.new()
 
@@ -26,7 +30,9 @@ func _on_host_pressed() -> void:
 func _on_join_pressed() -> void:
 	disable_buttons()
 	
-	peer.create_client(SERVER_ADDRESS, PORT)
+	server_address = host_ip_address.text
+	
+	peer.create_client(server_address, PORT)
 	multiplayer.multiplayer_peer = peer
 	
 	var player_field_instance = player_field_scene.instantiate()
@@ -47,4 +53,6 @@ func disable_buttons() -> void:
 	host.visible = false
 	join.disabled = true
 	join.visible = false
-	
+	host_ip_address.process_mode = Node.PROCESS_MODE_DISABLED
+	host_ip_address.visible = false
+	tip.visible = false

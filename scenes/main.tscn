@@ -28,21 +28,39 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=67225210]
+custom_minimum_size = Vector2(800, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_constants/separation = 128
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1997710235]
+layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Host" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1099055217]
-custom_minimum_size = Vector2(400, 0)
+[node name="Host" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1099055217]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Host"
 
-[node name="Join" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1357845643]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1728875697]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HostIPAddress" type="LineEdit" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1930794098]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+placeholder_text = "Enter the host address"
+
+[node name="Join" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1357845643]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Join"
 
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[node name="Tip" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=82495720]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Tip: You can Face yourself by entering 127.0.0.1 which is localhost"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/VBoxContainer2/Join" to="." method="_on_join_pressed"]

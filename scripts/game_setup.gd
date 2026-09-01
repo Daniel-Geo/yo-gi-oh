@@ -16,8 +16,8 @@ func host_setup() -> void:
 	get_parent().get_node("OpponentField/CanvasLayer/MarginContainer/OpponentHealth").text = str(starting_health)
 	battle_manager.player_health = starting_health
 	battle_manager.opponent_health = starting_health
-	get_parent().get_node("OpponentField/OpponentDeck").deck_size = get_parent().get_node("OpponentField/OpponentDeck").opponent_deck.size()
-	get_parent().get_node("OpponentField/OpponentDeck/RichTextLabel").text = str(get_parent().get_node("OpponentField/OpponentDeck").opponent_deck.size())
+	get_parent().get_node("OpponentField/OpponentDeck").deck_size = player_deck.player_deck.size()
+	get_parent().get_node("OpponentField/OpponentDeck/RichTextLabel").text = str(player_deck.player_deck.size())
 	await player_deck.draw_initial_hand()
 	end_turn_button.disabled = false
 	end_turn_button.visible = true

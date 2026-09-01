@@ -34,13 +34,12 @@ func on_left_mouse_button_released() -> void:
 
 func card_clicked(card) -> void:
 	if card.card_slot_card_is_in:
-		if battle_manager.is_player_turn:
-			if not card in battle_manager.player_cards_attacked_this_turn:
-				if card.card_type == CardDatabase.CardTypes.MONSTER:
-					if battle_manager.opponent_cards_on_battlefield.size() == 0:
-						battle_manager.direct_attack(card, "player")
-					else:
-						select_card_to_be_attacked(card)
+		if not card in battle_manager.player_cards_attacked_this_turn:
+			if card.card_type == CardDatabase.CardTypes.MONSTER:
+				if battle_manager.opponent_cards_on_battlefield.size() == 0:
+					battle_manager.direct_attack(card)
+				else:
+					select_card_to_be_attacked(card)
 	else:
 		start_drag(card)
 
@@ -81,17 +80,11 @@ func finish_drag() -> void:
 				player_hand.add_card_to_hand(card_being_dragged, card_draw_speed)
 				card_being_dragged = null
 				return
-				
-				
-			is_hovering_on_card = false
+			
+			var player_id = multiplayer.get_unique_id()
+			play_card_here_and_for_peer_opponent(player_id, str(card_being_dragged.name), str(card_slot.name))
+			rpc("play_card_here_and_for_peer_opponent", player_id, str(card_being_dragged.name), str(card_slot.name))
 			card_being_dragged.is_in_card_slot = true
-			card_being_dragged.card_slot_card_is_in = card_slot
-			card_being_dragged.scale = Vector2(card_slot_scale, card_slot_scale)
-			card_being_dragged.z_index = -1
-			player_hand.remove_card_from_hand(card_being_dragged)
-			card_being_dragged.position = card_slot.position
-			card_slot.is_card_in_card_slot = true
-			card_slot.get_node("Area2D/CollisionShape2D").disabled = true
 			
 			if card_being_dragged.card_type == CardDatabase.CardTypes.MONSTER:
 				battle_manager.player_cards_on_battlefield.append(card_being_dragged)
@@ -105,6 +98,30 @@ func finish_drag() -> void:
 	player_hand.add_card_to_hand(card_being_dragged, card_draw_speed)
 	card_being_dragged = null
 
+@rpc("any_peer")
+func play_card_here_and_for_peer_opponent(player_id, card_name, card_slot_name) -> void:
+	var card
+	var card_slot = $"../PlayerCardSlots".get_node(card_slot_name)
+	if multiplayer.get_unique_id() == player_id:
+		card = get_node(card_name)
+		is_hovering_on_card = false
+		player_hand.remove_card_from_hand(card)
+		card.position = card_slot.position
+		card_slot.get_node("Area2D/CollisionShape2D").disabled = true
+	else:
+		var opponent_field = get_parent().get_parent().get_node("OpponentField")
+		card = opponent_field.get_node("CardManager/" + card_name)
+		card_slot = opponent_field.get_node("OpponentCardSlots/" + card_slot_name)
+		opponent_field.get_node("OpponentHand").remove_card_from_hand(card)
+		var tween = get_tree().create_tween()
+		tween.tween_property(card, "position", card_slot.position, card_draw_speed)
+		card.get_node("AnimationPlayer").play("card_flip")
+		battle_manager.opponent_cards_on_battlefield.append(card)
+	
+	card.scale = Vector2(card_slot_scale, card_slot_scale)
+	card.z_index = -1
+	card.card_slot_card_is_in = card_slot
+	card_slot.is_card_in_card_slot = true
 
 func connect_card_signals(card) -> void:
 	card.connect("hovered", on_hovered_over_card)

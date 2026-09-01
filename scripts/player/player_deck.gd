@@ -24,14 +24,12 @@ func _ready() -> void:
 	#has_drawn_card_this_turn = true
 
 
-func draw_card() -> void:
+func draw_card(card_drawn_name) -> void:
 	has_drawn_card_this_turn = true
-	var card_drawn_name = player_deck[0]
 	player_deck.erase(card_drawn_name)
 	
 	if player_deck.size() == 0:
-		sprite_2d.visible = false
-		rich_text_label.visible = false
+		visible = false
 		collision_shape_2d.disabled = true
 	
 	rich_text_label.text = str(player_deck.size())
@@ -68,23 +66,26 @@ func draw_initial_hand() -> void:
 	
 	var player_id = multiplayer.get_unique_id()
 	for i in range(starting_hand_size):
-		draw_here_and_for_peer_opponent(player_id)
-		rpc("draw_here_and_for_peer_opponent", player_id)
+		var card_drawn_name = player_deck[0]
+		draw_here_and_for_peer_opponent(player_id, card_drawn_name)
+		rpc("draw_here_and_for_peer_opponent", player_id, card_drawn_name)
 		has_drawn_card_this_turn = false
 		deck_timer.start()
 		await deck_timer.timeout
 	has_drawn_card_this_turn = true
 
 @rpc("any_peer")
-func draw_here_and_for_peer_opponent(player_id: int) -> void:
+func draw_here_and_for_peer_opponent(player_id: int, card_drawn_name: String) -> void:
 	if multiplayer.get_unique_id() == player_id:
-		draw_card()
+		draw_card(card_drawn_name)
 	else:
-		get_parent().get_parent().get_node("OpponentField/OpponentDeck").draw_card()
+		get_parent().get_parent().get_node("OpponentField/OpponentDeck").draw_card(card_drawn_name)
 
 func deck_clicked() -> void:
 	if has_drawn_card_this_turn:
 		return
+	
+	var card_drawn_name = player_deck[0]
 	var player_id = multiplayer.get_unique_id()
-	draw_here_and_for_peer_opponent(player_id)
+	draw_here_and_for_peer_opponent(player_id, card_drawn_name)
 	rpc("draw_here_and_for_peer_opponent", player_id)

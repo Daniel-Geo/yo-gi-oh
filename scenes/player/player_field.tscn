@@ -18,51 +18,47 @@ script = ExtResource("1_qe4mp")
 
 [node name="PlayerCardSlots" type="Node2D" parent="." unique_id=40741591]
 
-[node name="MonsterCardSlots" type="Node2D" parent="PlayerCardSlots" unique_id=200711819]
-
-[node name="CardSlot" parent="PlayerCardSlots/MonsterCardSlots" unique_id=1162383417 instance=ExtResource("2_erhd2")]
+[node name="CardSlot" parent="PlayerCardSlots" unique_id=1162383417 instance=ExtResource("2_erhd2")]
 position = Vector2(-70, 25)
 scale = Vector2(0.8, 0.8)
 
-[node name="CardSlot2" parent="PlayerCardSlots/MonsterCardSlots" unique_id=1332614327 instance=ExtResource("2_erhd2")]
+[node name="CardSlot2" parent="PlayerCardSlots" unique_id=1332614327 instance=ExtResource("2_erhd2")]
 position = Vector2(-35, 25)
 scale = Vector2(0.8, 0.8)
 
-[node name="CardSlot3" parent="PlayerCardSlots/MonsterCardSlots" unique_id=1627831307 instance=ExtResource("2_erhd2")]
+[node name="CardSlot3" parent="PlayerCardSlots" unique_id=1627831307 instance=ExtResource("2_erhd2")]
 position = Vector2(0, 25)
 scale = Vector2(0.8, 0.8)
 
-[node name="CardSlot4" parent="PlayerCardSlots/MonsterCardSlots" unique_id=165099442 instance=ExtResource("2_erhd2")]
+[node name="CardSlot4" parent="PlayerCardSlots" unique_id=165099442 instance=ExtResource("2_erhd2")]
 position = Vector2(35, 25)
 scale = Vector2(0.8, 0.8)
 
-[node name="CardSlot5" parent="PlayerCardSlots/MonsterCardSlots" unique_id=378459484 instance=ExtResource("2_erhd2")]
+[node name="CardSlot5" parent="PlayerCardSlots" unique_id=378459484 instance=ExtResource("2_erhd2")]
 position = Vector2(70, 25)
 scale = Vector2(0.8, 0.8)
 
-[node name="MagicCardSlots" type="Node2D" parent="PlayerCardSlots" unique_id=1766135837]
-
-[node name="CardSlot" parent="PlayerCardSlots/MagicCardSlots" unique_id=457143848 instance=ExtResource("2_erhd2")]
+[node name="CardSlot6" parent="PlayerCardSlots" unique_id=457143848 instance=ExtResource("2_erhd2")]
 position = Vector2(-70, 68)
 scale = Vector2(0.8, 0.8)
 card_slot_type = 1
 
-[node name="CardSlot2" parent="PlayerCardSlots/MagicCardSlots" unique_id=1833726311 instance=ExtResource("2_erhd2")]
+[node name="CardSlot7" parent="PlayerCardSlots" unique_id=1833726311 instance=ExtResource("2_erhd2")]
 position = Vector2(-35, 68)
 scale = Vector2(0.8, 0.8)
 card_slot_type = 1
 
-[node name="CardSlot3" parent="PlayerCardSlots/MagicCardSlots" unique_id=1274012992 instance=ExtResource("2_erhd2")]
+[node name="CardSlot8" parent="PlayerCardSlots" unique_id=1274012992 instance=ExtResource("2_erhd2")]
 position = Vector2(0, 68)
 scale = Vector2(0.8, 0.8)
 card_slot_type = 1
 
-[node name="CardSlot4" parent="PlayerCardSlots/MagicCardSlots" unique_id=1441421779 instance=ExtResource("2_erhd2")]
+[node name="CardSlot9" parent="PlayerCardSlots" unique_id=1441421779 instance=ExtResource("2_erhd2")]
 position = Vector2(35, 68)
 scale = Vector2(0.8, 0.8)
 card_slot_type = 1
 
-[node name="CardSlot5" parent="PlayerCardSlots/MagicCardSlots" unique_id=1797067725 instance=ExtResource("2_erhd2")]
+[node name="CardSlot10" parent="PlayerCardSlots" unique_id=1797067725 instance=ExtResource("2_erhd2")]
 position = Vector2(70, 68)
 scale = Vector2(0.8, 0.8)
 card_slot_type = 1
@@ -110,6 +106,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="EndTurnButton" type="Button" parent="CanvasLayer/MarginContainer" unique_id=2088339470]
 visible = false
+z_index = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -136,3 +133,5 @@ script = ExtResource("8_8nv6h")
 
 [node name="BattleTimer" type="Timer" parent="." unique_id=1230017391]
 one_shot = true
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/EndTurnButton" to="BattleManager" method="_on_end_turn_button_pressed"]

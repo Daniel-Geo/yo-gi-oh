@@ -9,25 +9,21 @@ extends Node2D
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var rich_text_label: RichTextLabel = $RichTextLabel
 
-var opponent_deck: Array = ["knight", "archer", "demon", "knight", "archer", "demon", "knight", "tornado", "tornado", "tornado"]
 var deck_size: int
 
 func _ready() -> void:
-	opponent_deck.shuffle()
+	deck_size = get_parent().get_parent().get_node("PlayerField/PlayerDeck").player_deck.size()
 	#rich_text_label.text = str(opponent_deck.size())
 	
 	#for i in range(starting_hand_size):
 		#draw_card()
 
-func draw_card() -> void:
-	var card_drawn_name = opponent_deck[0]
-	opponent_deck.erase(card_drawn_name)
-	
-	if opponent_deck.size() == 0:
-		sprite_2d.visible = false
-		rich_text_label.visible = false
-	
-	rich_text_label.text = str(opponent_deck.size())
+func draw_card(card_drawn_name) -> void:
+	if deck_size - 1 <= 0:
+		visible = false
+	else:
+		deck_size -= 1
+		rich_text_label.text = str(deck_size)
 	var card_scene = preload("res://scenes/opponent/opponent_card.tscn")
 	var new_card = card_scene.instantiate()
 	var card_image_path = "res://assets/sprites/" + card_drawn_name + ".png"

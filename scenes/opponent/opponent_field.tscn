@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cnh5d5xwt5eke" path="res://scenes/opponent/opponent_deck.tscn" id="4_1xnd4"]
 [ext_resource type="Script" uid="uid://bydw1p0yl3822" path="res://scripts/opponent/opponent_deck.gd" id="5_wx14n"]
 [ext_resource type="Texture2D" uid="uid://bw8rmybgmiqh8" path="res://assets/sprites/CardSlot.png" id="6_cdiv0"]
+[ext_resource type="PackedScene" uid="uid://o8wy22o1b4xv" path="res://scenes/end_screen.tscn" id="6_kcrlb"]
 [ext_resource type="Script" uid="uid://bgywb8rmhmodi" path="res://scripts/input_manager.gd" id="7_kcrlb"]
 
 [node name="OpponentField" type="Node2D" unique_id=1923962278]
@@ -13,62 +14,58 @@
 
 [node name="OpponentCardSlots" type="Node2D" parent="." unique_id=616139986]
 
-[node name="MonsterCardSlots" type="Node2D" parent="OpponentCardSlots" unique_id=1091345697]
-
-[node name="CardSlot" parent="OpponentCardSlots/MonsterCardSlots" unique_id=1162383417 instance=ExtResource("2_myng3")]
-process_mode = 4
-position = Vector2(-70, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot2" parent="OpponentCardSlots/MonsterCardSlots" unique_id=1706802160 instance=ExtResource("2_myng3")]
-process_mode = 4
-position = Vector2(-35, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot3" parent="OpponentCardSlots/MonsterCardSlots" unique_id=1181174981 instance=ExtResource("2_myng3")]
-process_mode = 4
-position = Vector2(0, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot4" parent="OpponentCardSlots/MonsterCardSlots" unique_id=1925979245 instance=ExtResource("2_myng3")]
-process_mode = 4
-position = Vector2(35, -25)
-scale = Vector2(0.8, 0.8)
-
-[node name="CardSlot5" parent="OpponentCardSlots/MonsterCardSlots" unique_id=782954818 instance=ExtResource("2_myng3")]
+[node name="CardSlot" parent="OpponentCardSlots" unique_id=782954818 instance=ExtResource("2_myng3")]
 process_mode = 4
 position = Vector2(70, -25)
 scale = Vector2(0.8, 0.8)
 
-[node name="MagicCardSlots" type="Node2D" parent="OpponentCardSlots" unique_id=1854242397]
-
-[node name="CardSlot" parent="OpponentCardSlots/MagicCardSlots" unique_id=1990937161 instance=ExtResource("2_myng3")]
+[node name="CardSlot2" parent="OpponentCardSlots" unique_id=1925979245 instance=ExtResource("2_myng3")]
 process_mode = 4
-position = Vector2(-70, -68)
+position = Vector2(35, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot3" parent="OpponentCardSlots" unique_id=1181174981 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(0, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot4" parent="OpponentCardSlots" unique_id=1706802160 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(-35, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot5" parent="OpponentCardSlots" unique_id=1162383417 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(-70, -25)
+scale = Vector2(0.8, 0.8)
+
+[node name="CardSlot6" parent="OpponentCardSlots" unique_id=448842728 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(70, -68)
 scale = Vector2(0.8, 0.8)
 card_slot_type = 1
 
-[node name="CardSlot2" parent="OpponentCardSlots/MagicCardSlots" unique_id=1589534145 instance=ExtResource("2_myng3")]
-process_mode = 4
-position = Vector2(-35, -68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot3" parent="OpponentCardSlots/MagicCardSlots" unique_id=919522286 instance=ExtResource("2_myng3")]
-process_mode = 4
-position = Vector2(0, -68)
-scale = Vector2(0.8, 0.8)
-card_slot_type = 1
-
-[node name="CardSlot4" parent="OpponentCardSlots/MagicCardSlots" unique_id=1020943424 instance=ExtResource("2_myng3")]
+[node name="CardSlot7" parent="OpponentCardSlots" unique_id=1020943424 instance=ExtResource("2_myng3")]
 process_mode = 4
 position = Vector2(35, -68)
 scale = Vector2(0.8, 0.8)
 card_slot_type = 1
 
-[node name="CardSlot5" parent="OpponentCardSlots/MagicCardSlots" unique_id=448842728 instance=ExtResource("2_myng3")]
+[node name="CardSlot9" parent="OpponentCardSlots" unique_id=1589534145 instance=ExtResource("2_myng3")]
 process_mode = 4
-position = Vector2(70, -68)
+position = Vector2(-35, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot8" parent="OpponentCardSlots" unique_id=919522286 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(0, -68)
+scale = Vector2(0.8, 0.8)
+card_slot_type = 1
+
+[node name="CardSlot10" parent="OpponentCardSlots" unique_id=1990937161 instance=ExtResource("2_myng3")]
+process_mode = 4
+position = Vector2(-70, -68)
 scale = Vector2(0.8, 0.8)
 card_slot_type = 1
 
@@ -103,6 +100,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -119,6 +117,9 @@ fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EndScreen" parent="CanvasLayer" unique_id=1662831838 instance=ExtResource("6_kcrlb")]
+visible = false
 
 [node name="InputManager" type="Node2D" parent="." unique_id=680484586]
 script = ExtResource("7_kcrlb")
